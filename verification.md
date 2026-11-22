@@ -90,3 +90,47 @@ for the known ~8-point historical overestimate. The cover proves strong composit
 readable threats and HUD, the gold objective, and clear palette separation at full
 size and the 300px thumbnail; the getaway thumbnail is substantially darker. This
 estimate is visual only and is not a measured leaderboard result.
+
+## Round 4 — route label and vision cones
+
+- Moved the SHADOW GALLERY label to its open lower-left waypoint and draw all
+  route labels after display panels and covers. Increased camera cone alpha to
+  0.28 and patrol cone alpha to 0.33.
+- Re-captured all four fixed-seed shots twice in separate browser targets;
+  each pair was byte-identical. Stored 1280×720 JPEGs under 256 KiB. Viewed
+  each full-size shot and its 300px review image. Cover shows the complete
+  SHADOW GALLERY label, thief, 3 guards with cones, 2 camera beams, gold loot,
+  and alarm meter; a guard cone remains clearly visible at 300px.
+- Per-shot thumbnail check: cover—loot, cone/beam, and alarm identifiable;
+  routes—loot, cone/beam, and alarm identifiable; alarm—$1,200, danger cones,
+  and alarm identifiable; getaway—$1,200 and alarm identifiable, cones faint
+  under the known dark end-screen overlay.
+- **V0 PASS:** 14 game files/directories, 33,082 bytes; four valid JPEGs within
+  limits; 12 modules parse and no network-looking references. The verifier's
+  main runs produced identical output trees; dossier 463,232 bytes.
+- **V1 FAIL (latest run):** the verifier stopped at title/play smoke because
+  Enter left the test page in the title state, with no browser errors or bad
+  requests. Earlier attempts alternated between that failure and a route A
+  bot failure at the title state. All four fixed-seed shots individually
+  passed in an earlier run. A full verifier run before adding the label anchor
+  metadata passed V1, including route A; do not count V1 as a clean final pass.
+- **V2 PASS (earlier complete verifier run):** cover pixel checklist found
+  thief, 3 guards, 2 cameras, loot, and alarm; gold=2,257px, alarm=2,366px,
+  warm danger cells=7, max flat cell=0.432. Play HUD state: $1,200, alarm 33,
+  2 tools, 41 seconds, 3 guards. Final verifier stopped at V1 before V2 ran.
+- **V3 PASS (earlier complete verifier run):** 12 source modules; largest=9,765
+  bytes. Final verifier stopped at V1 before V3 ran.
+- Independent `main.ts` runs to `/tmp/heist-round4-c` and
+  `/tmp/heist-round4-d` matched byte-for-byte (18 files each).
+- Fresh kit `check --repo`: **5 passed, 1 failed, 16 skipped, 3 checked at
+  submission**. Pass: competition_open, snapshot, license_osi, entrypoint,
+  repo_created_after_open. Fail: transcripts_present (no transcript bundle,
+  omitted as directed). Skipped: prerequisites, strategy_note, committed_secret,
+  transcripts_recorded, thinking_wellformed, thinking_in_window,
+  thinking_committed, thinking_reproduces, thinking_on_task, thinking_turns,
+  thinking_priced, thinking_revised, thinking_fresh, transcripts_run_record,
+  thinking_own_work, repo_public. At-submission checks: repo_owner,
+  source_bundle, duplicate_snapshot. The kit evaluated committed snapshot
+  a3313b7 and noted the working tree changes were not checked.
+- Screenshot-only dev win-rate estimate: **74–80%**, discounted ~8 points for
+  prior overestimates; this is a visual estimate, not a measured result.

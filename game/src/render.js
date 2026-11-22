@@ -29,9 +29,6 @@ function roomArt(ctx,g) {
   routes.forEach((route,index)=>{
     ctx.strokeStyle=route.color; ctx.globalAlpha=.43;
     ctx.beginPath(); route.points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y)); ctx.stroke();
-    const [x,y]=route.points[Math.floor(route.points.length/2)];
-    ctx.globalAlpha=.9; rounded(ctx,x-54,y-13,108,25,'rgba(12,23,34,.86)',route.color);
-    text(ctx,route.name,x,y+4,9,route.color,800,'center');
   }); ctx.restore();
   // Built-in gallery landmarks fill the zones without obscuring movement.
   drawArch(ctx,92,348,'WEST WING'); drawArch(ctx,1086,350,'EAST WING');
@@ -42,6 +39,11 @@ function roomArt(ctx,g) {
     ctx.fillStyle='rgba(157,178,190,.17)'; ctx.fillRect(rect.x+8,rect.y+8,rect.w-16,5);
     if(!isPillar){ text(ctx,rect.label.toUpperCase(),rect.x+rect.w/2,rect.y+rect.h/2+4,9,'#8b9ba6',700,'center'); }
   });
+  ctx.save(); routes.forEach(route=>{
+    const [x,y]=route.labelAt??route.points[Math.floor(route.points.length/2)];
+    ctx.globalAlpha=.9; rounded(ctx,x-54,y-13,108,25,'rgba(12,23,34,.86)',route.color);
+    text(ctx,route.name,x,y+4,9,route.color,800,'center');
+  }); ctx.restore();
   drawExit(ctx,g); drawVault(ctx,g);
 }
 function drawArch(ctx,x,y,name){
@@ -87,10 +89,10 @@ function cone(ctx,origin,angle,range,half,color,alpha){
   ctx.closePath();ctx.fillStyle=color;ctx.globalAlpha=alpha;ctx.fill();ctx.globalAlpha=1;
 }
 function drawDanger(ctx,g){
-  g.cameras.forEach(camera=>{if(!camera.loop)cone(ctx,camera,camera.angle,camera.range,.55,'#ef8c3c',.15);});
+  g.cameras.forEach(camera=>{if(!camera.loop)cone(ctx,camera,camera.angle,camera.range,.55,'#ef8c3c',.28);});
   g.guards.forEach(guard=>{
     const color=guard.state==='chase'?'#f04f51':guard.state==='glance'||guard.state==='investigate'?'#f6a344':'#a4afb3';
-    cone(ctx,guard,guard.angle,330,.92,color,guard.state==='chase'?.27:guard.state==='patrol'?.16:.23);
+    cone(ctx,guard,guard.angle,330,.92,color,guard.state==='chase'?.27:guard.state==='patrol'?.33:.23);
   });
 }
 function drawCamera(ctx,camera){

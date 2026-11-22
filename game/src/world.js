@@ -10,7 +10,7 @@ export const vault = { x: 640, y: 164, r: 54 };
 export const exit = { x: 1122, y: 112, r: 44 };
 export const routes = [
   { name:'MAIN FLOOR', color:'#d5b887', points:[[640,650],[640,390],[640,230]], note:'fast · exposed' },
-  { name:'SHADOW GALLERY', color:'#78a6bc', points:[[150,632],[340,632],[370,370],[355,170],[560,170]], note:'slow · concealed' },
+  { name:'SHADOW GALLERY', color:'#78a6bc', points:[[150,632],[340,632],[370,370],[355,170],[560,170]], labelAt:[340,632], note:'slow · concealed' },
   { name:'SERVICE VENT', color:'#87c1a9', points:[[194,650],[194,386],[194,124],[926,124],[1050,124]], note:'one way · bypasses west watch' },
 ];
 export function blocked(x, y, radius = 14) {
